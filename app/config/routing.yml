@@ -1,0 +1,9 @@
+itech_formulaire:
+    resource: "@ItechFormulaireBundle/Controller/"
+    type:     annotation
+    prefix:   /
+    
+acme_website: 
+    resource: "@AcmeDemoBundle/Resources/config/routing.yml"
+    prefix:   / 
+
