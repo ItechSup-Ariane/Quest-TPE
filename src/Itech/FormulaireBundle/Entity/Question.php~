@@ -27,9 +27,14 @@ class Question
      * @ORM\Column(name="libelle", type="string", length=255)
      */
     private $libelle;
-
-
+    
     /**
+     * @ORM\ManyToOne(targetEntity="Categorie", inversedBy="questions")
+     * @ORM\JoinColumn(name="categorie_id", referencedColumnName="id")
+     */
+    private $categorie;
+
+        /**
      * Get id
      *
      * @return integer 

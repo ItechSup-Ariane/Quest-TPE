@@ -3,6 +3,7 @@
 namespace Itech\FormulaireBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Categorie
@@ -34,6 +35,15 @@ class Categorie
      * @ORM\JoinColumn(name="questionnaire_id", referencedColumnName="id")
      */
     private $questionnaire;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Question", mappedBy="categorie")
+     */
+    private $questions;
+    
+    function __construct() {
+        $this->questions = new ArrayCollection();
+    }
     
     /**
      * Get id

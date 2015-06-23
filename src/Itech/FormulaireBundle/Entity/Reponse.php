@@ -27,7 +27,12 @@ class Reponse
      * @ORM\Column(name="note", type="string", length=255)
      */
     private $note;
-
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Question", inversedBy="reponses")
+     * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
+     */
+    private $question;
 
     /**
      * Get id
@@ -60,5 +65,30 @@ class Reponse
     public function getNote()
     {
         return $this->note;
+    }
+    
+
+    /**
+     * Set question
+     *
+     * @param \Itech\FormulaireBundle\Entity\Question $question
+     *
+     * @return Reponse
+     */
+    public function setQuestion(\Itech\FormulaireBundle\Entity\Question $question = null)
+    {
+        $this->question = $question;
+
+        return $this;
+    }
+
+    /**
+     * Get question
+     *
+     * @return \Itech\FormulaireBundle\Entity\Question
+     */
+    public function getQuestion()
+    {
+        return $this->question;
     }
 }

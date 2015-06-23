@@ -3,6 +3,7 @@
 namespace Itech\FormulaireBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Question
@@ -27,7 +28,21 @@ class Question
      * @ORM\Column(name="libelle", type="string", length=255)
      */
     private $libelle;
-
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Categorie", inversedBy="questions")
+     * @ORM\JoinColumn(name="categorie_id", referencedColumnName="id")
+     */
+    private $categorie;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Reponse", mappedBy="question")
+     */
+    private $reponses;
+    
+    function __construct() {
+        $this->reponses = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -60,5 +75,29 @@ class Question
     public function getLibelle()
     {
         return $this->libelle;
+    }
+
+    /**
+     * Set categorie
+     *
+     * @param \Itech\FormulaireBundle\Entity\Categorie $categorie
+     *
+     * @return Question
+     */
+    public function setCategorie(\Itech\FormulaireBundle\Entity\Categorie $categorie = null)
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * Get categorie
+     *
+     * @return \Itech\FormulaireBundle\Entity\Categorie
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
     }
 }

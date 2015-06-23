@@ -16,6 +16,8 @@ class QuestionType extends AbstractType
     {
         $builder
             ->add('libelle')
+            
+            ->add('categorie', null, array('property' => 'libelle'))
         ;
     }
     

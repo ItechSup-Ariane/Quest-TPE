@@ -16,6 +16,8 @@ class ReponseType extends AbstractType
     {
         $builder
             ->add('note')
+            
+            ->add('question', null, array('property' => 'libelle'))
         ;
     }
     

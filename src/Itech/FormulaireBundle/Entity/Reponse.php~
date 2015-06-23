@@ -27,7 +27,12 @@ class Reponse
      * @ORM\Column(name="note", type="string", length=255)
      */
     private $note;
-
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Question", inversedBy="reponses")
+     * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
+     */
+    private $question;
 
     /**
      * Get id
@@ -61,4 +66,5 @@ class Reponse
     {
         return $this->note;
     }
+    
 }
