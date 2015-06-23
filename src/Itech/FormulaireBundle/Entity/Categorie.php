@@ -29,7 +29,6 @@ class Categorie
      */
     private $libelle;
     
-    // RAJOUTER LA RELATION ICI
     /**
      * @ORM\ManyToOne(targetEntity="Questionnaire", inversedBy="categories")
      * @ORM\JoinColumn(name="questionnaire_id", referencedColumnName="id")
