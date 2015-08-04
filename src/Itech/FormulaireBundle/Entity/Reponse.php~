@@ -33,6 +33,12 @@ class Reponse
      * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
      */
     private $question;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="reponses")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
 
     /**
      * Get id
@@ -67,4 +73,28 @@ class Reponse
         return $this->note;
     }
     
+
+    /**
+     * Set question
+     *
+     * @param \Itech\FormulaireBundle\Entity\Question $question
+     *
+     * @return Reponse
+     */
+    public function setQuestion(\Itech\FormulaireBundle\Entity\Question $question = null)
+    {
+        $this->question = $question;
+
+        return $this;
+    }
+
+    /**
+     * Get question
+     *
+     * @return \Itech\FormulaireBundle\Entity\Question
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
 }

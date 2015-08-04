@@ -29,11 +29,17 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="Questionnaire", mappedBy="user")
      */
     private $questionnaires;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Reponse", mappedBy="user")
+     */
+    private $reponses;
 
     public function __construct()
     {
         parent::__construct();
         $this->questionnaires = new ArrayCollection();
+        $this->reponses = new ArrayCollection();
     }
 
     /**
@@ -68,5 +74,39 @@ class User extends BaseUser
     public function getQuestionnaires()
     {
         return $this->questionnaires;
+    }
+
+    /**
+     * Add reponse
+     *
+     * @param \Itech\FormulaireBundle\Entity\Reponse $reponse
+     *
+     * @return User
+     */
+    public function addReponse(\Itech\FormulaireBundle\Entity\Reponse $reponse)
+    {
+        $this->reponses[] = $reponse;
+
+        return $this;
+    }
+
+    /**
+     * Remove reponse
+     *
+     * @param \Itech\FormulaireBundle\Entity\Reponse $reponse
+     */
+    public function removeReponse(\Itech\FormulaireBundle\Entity\Reponse $reponse)
+    {
+        $this->reponses->removeElement($reponse);
+    }
+
+    /**
+     * Get reponses
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReponses()
+    {
+        return $this->reponses;
     }
 }
