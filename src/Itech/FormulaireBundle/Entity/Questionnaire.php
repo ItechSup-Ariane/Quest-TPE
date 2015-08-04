@@ -29,7 +29,6 @@ class Questionnaire
      */
     private $title;
     
-    // RAJOUTER LA RELATION DANS LE CONSTRUCTEUR ICI
     /**
      * @ORM\OneToMany(targetEntity="Categorie", mappedBy="questionnaire")
      */
@@ -38,6 +37,12 @@ class Questionnaire
     function __construct() {
         $this->categories = new ArrayCollection();
     }
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="questionnaires")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
     
     /**
      * Get id
@@ -103,5 +108,29 @@ class Questionnaire
     public function getCategories()
     {
         return $this->categories;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Itech\FormulaireBundle\Entity\User $user
+     *
+     * @return Questionnaire
+     */
+    public function setUser(\Itech\FormulaireBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Itech\FormulaireBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

@@ -39,6 +39,12 @@ class Questionnaire
     }
     
     /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="questionnaires")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+    
+    /**
      * Get id
      *
      * @return integer 
@@ -69,5 +75,38 @@ class Questionnaire
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Add categories
+     *
+     * @param \Itech\FormulaireBundle\Entity\Categorie $categories
+     * @return Questionnaire
+     */
+    public function addCategory(\Itech\FormulaireBundle\Entity\Categorie $categories)
+    {
+        $this->categories[] = $categories;
+
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param \Itech\FormulaireBundle\Entity\Categorie $categories
+     */
+    public function removeCategory(\Itech\FormulaireBundle\Entity\Categorie $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCategories()
+    {
+        return $this->categories;
     }
 }
