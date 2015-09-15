@@ -1,12 +1,21 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Hello {{ fname }} {{ lname }} !</title>
-    </head>
-    <body>
-        <h1>{{ title }}</h1>
-        <h2>formation : {{ formLib }}<br />promotion : {{ formProm }}</h2>
-        <p>categorie1 :<br /></p>
-    </body>
-</html>
+{% block body %}
+    <h1>Selectionner le formulaire:</h1>
+    <div name='choixQuestionnaire'>
+        <ul>
+            {% if questionnaires is defined %}
+                {% for questionnaire in questionnaires %}
+                    <li><a href={{ path('afficher_questionnaire', {'id':questionnaire.id}) }}>{{ questionnaire.title }}</a></li>
+                    {% endfor %}
+                {% else %}
+                <li>Il n'y a aucun formulaire non complété</li>
+                {% endif %}
+        </ul>
+    </div>
+    {% if name == 'admin' %}
+        <form action={{ path('index_admin') }}>
+            <input type='submit'  value='Administrateur'/>
+        </form>
+    {% endif %}
+    <a href='/login'> Connecté en tant que : {{ name }} </a>
 
+{% endblock %}

@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Questionnaire
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Itech\FormulaireBundle\Entity\QuestionnaireRepository")
  */
 class Questionnaire
 {   

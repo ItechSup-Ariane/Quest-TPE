@@ -109,4 +109,28 @@ class Questionnaire
     {
         return $this->categories;
     }
+
+    /**
+     * Set user
+     *
+     * @param \Itech\FormulaireBundle\Entity\User $user
+     *
+     * @return Questionnaire
+     */
+    public function setUser(\Itech\FormulaireBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Itech\FormulaireBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }
