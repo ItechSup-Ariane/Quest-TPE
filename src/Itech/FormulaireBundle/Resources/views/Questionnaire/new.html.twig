@@ -1,15 +1,74 @@
 {% extends '::base.html.twig' %}
 
+{% block javascripts -%}
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+        console.log("ok");
+        
+        //*************************************************************************************
+        // A REPRENDRE AVEC QUESTIONNAIRE ET CATEGORIE POUR CHARGER LES CATEG DYNAMIQUEMENT !!!
+        //*************************************************************************************
+        
+        // Récupère le div qui contient la collection de tags
+        var $collectionHolder = $('ul.categories');
+
+        // ajoute un lien « Ajouter une catégorie »
+        var $addCategoryLink = $('<a href="#" class="add_a_category">Ajouter une catégorie</a>');
+        var $newLinkLi = $('<li></li>').append($addCategoryLink);
+
+        jQuery(document).ready(function() {
+            // ajoute l'ancre « ajouter une catégorie » et li à la balise ul
+            $collectionHolder.append($newLinkLi);
+
+            // count the current form inputs we have (e.g. 2), use that as the new
+            // index when inserting a new item (e.g. 2)
+            //$collectionHolder.data('index', $collectionHolder.find(':input').length);
+            
+            function addTagForm(collectionHolder, $newLinkLi) {
+                // Récupère l'élément ayant l'attribut data-prototype comme expliqué plus tôt
+                var prototype = collectionHolder.attr('data-prototype');
+
+                // Remplace '__name__' dans le HTML du prototype par un nombre basé sur
+                // la longueur de la collection courante
+                var newForm = prototype.replace(/__name__/g, collectionHolder.children().length);
+
+                // Affiche le formulaire dans la page dans un li, avant le lien "ajouter un tag"
+                var $newFormLi = $('<li></li>').append(newForm);
+                $newLinkLi.before($newFormLi);
+            }
+            
+            $addCategoryLink.on('click', function(e) {
+                // empêche le lien de créer un « # » dans l'URL
+                e.preventDefault();
+
+                // ajoute un nouveau formulaire catégorie (voir le prochain bloc de code)
+                addTagForm($collectionHolder, $newLinkLi);
+            });
+        });       
+    </script>
+{% endblock %}
+
 {% block body -%}
-    <h1>Questionnaire creation</h1>
-
-    {{ form(form) }}
-
-        <ul class="record_actions">
+    <h1>Créer un questionnaire</h1>
+    <form method="POST" action="{{ path("questionnaire_create") }}"
+    {{ form_row(form.title) }}
+    
+    <h3>Catégories</h3>
+    <ul class="categories" data-prototype="{{ form_widget(form.categories.vars.prototype)|e }}">
+        {# itère sur chaque catégorie et affiche son unique champ : libelle #}
+        {% for category in form.categories %}
+            <li>{{ form_row(category.libelle) }}</li>
+        {% endfor %}
+    </ul>
+    
+    {{ form_rest(form) }}
+    </form>
+    
+    <ul class="record_actions">
     <li>
         <a href="{{ path('questionnaire') }}">
             Back to the list
         </a>
     </li>
-</ul>
+    </ul>
 {% endblock %}

@@ -16,6 +16,12 @@ class QuestionnaireType extends AbstractType
     {
         $builder
             ->add('title')
+                
+            ->add('categories', 'collection', array(
+                'type' => new CategorieType(),
+                'allow_add' => true,
+                'by_reference' => false,
+                ))
         ;
     }
     

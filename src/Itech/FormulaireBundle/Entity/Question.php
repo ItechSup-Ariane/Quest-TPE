@@ -100,4 +100,38 @@ class Question
     {
         return $this->categorie;
     }
+
+    /**
+     * Add reponse
+     *
+     * @param \Itech\FormulaireBundle\Entity\Reponse $reponse
+     *
+     * @return Question
+     */
+    public function addReponse(\Itech\FormulaireBundle\Entity\Reponse $reponse)
+    {
+        $this->reponses[] = $reponse;
+
+        return $this;
+    }
+
+    /**
+     * Remove reponse
+     *
+     * @param \Itech\FormulaireBundle\Entity\Reponse $reponse
+     */
+    public function removeReponse(\Itech\FormulaireBundle\Entity\Reponse $reponse)
+    {
+        $this->reponses->removeElement($reponse);
+    }
+
+    /**
+     * Get reponses
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReponses()
+    {
+        return $this->reponses;
+    }
 }

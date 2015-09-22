@@ -30,7 +30,7 @@ class Questionnaire
     private $title;
     
     /**
-     * @ORM\OneToMany(targetEntity="Categorie", mappedBy="questionnaire")
+     * @ORM\OneToMany(targetEntity="Categorie", mappedBy="questionnaire", cascade={"persist"})
      */
     private $categories;
     
@@ -80,12 +80,14 @@ class Questionnaire
     /**
      * Add categories
      *
-     * @param \Itech\FormulaireBundle\Entity\Categorie $categories
+     * @param \Itech\FormulaireBundle\Entity\Categorie $categorie
      * @return Questionnaire
      */
-    public function addCategory(\Itech\FormulaireBundle\Entity\Categorie $categories)
+    public function addCategory(\Itech\FormulaireBundle\Entity\Categorie $categorie)
     {
-        $this->categories[] = $categories;
+        $categorie->setQuestionnaire($this);
+        
+        $this->categories[] = $categorie;
 
         return $this;
     }
@@ -93,11 +95,11 @@ class Questionnaire
     /**
      * Remove categories
      *
-     * @param \Itech\FormulaireBundle\Entity\Categorie $categories
+     * @param \Itech\FormulaireBundle\Entity\Categorie $categorie
      */
-    public function removeCategory(\Itech\FormulaireBundle\Entity\Categorie $categories)
+    public function removeCategory(\Itech\FormulaireBundle\Entity\Categorie $categorie)
     {
-        $this->categories->removeElement($categories);
+        $this->categories->removeElement($categorie);
     }
 
     /**

@@ -1,3 +1,5 @@
+{% extends "::base.html.twig" %}
+
 {% block body %}
     <h1>Selectionner le formulaire:</h1>
     <div name='choixQuestionnaire'>
@@ -16,6 +18,9 @@
             <input type='submit'  value='Administrateur'/>
         </form>
     {% endif %}
-    <a href='/login'> Connecté en tant que : {{ name }} </a>
+    <a href="{{ path("questionnaire_new") }}">nouveau questionnaire</a>
+    <br>
+    <br>
+    <a href="{{ path("fos_user_security_login") }}"> Connecté en tant que : {{ name }} </a>
 
 {% endblock %}

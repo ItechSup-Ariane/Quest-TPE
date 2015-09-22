@@ -31,7 +31,7 @@ class Categorie
     
     /**
      * @ORM\ManyToOne(targetEntity="Questionnaire", inversedBy="categories")
-     * @ORM\JoinColumn(name="questionnaire_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="questionnaire_id", referencedColumnName="id", nullable=false)
      */
     private $questionnaire;
     
@@ -98,5 +98,39 @@ class Categorie
     public function getQuestionnaire()
     {
         return $this->questionnaire;
+    }
+
+    /**
+     * Add question
+     *
+     * @param \Itech\FormulaireBundle\Entity\Question $question
+     *
+     * @return Categorie
+     */
+    public function addQuestion(\Itech\FormulaireBundle\Entity\Question $question)
+    {
+        $this->questions[] = $question;
+
+        return $this;
+    }
+
+    /**
+     * Remove question
+     *
+     * @param \Itech\FormulaireBundle\Entity\Question $question
+     */
+    public function removeQuestion(\Itech\FormulaireBundle\Entity\Question $question)
+    {
+        $this->questions->removeElement($question);
+    }
+
+    /**
+     * Get questions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
     }
 }
