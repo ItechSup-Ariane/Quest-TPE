@@ -8,18 +8,7 @@
                 {% for categorie in questionnaire.categories %}
                     <tr>
                         <td><strong><u>{{ categorie.libelle }}</u></strong></td>
-                    </tr>
-                    {% for question in categorie.questions %}
-                        <tr>
-                            <td><i>{{ question.libelle }}</i></td>
-
-                            <td><label>0</label><input type="radio" name={{ question.id }} required value=0></td>
-                            <td><label>1</label><input type="radio" name={{ question.id }} value=1></td>
-                            <td><label>2</label><input type="radio" name={{ question.id }} value=2></td>
-                            <td><label>3</label><input type="radio" name={{ question.id }} value=3></td>
-                            <td><label>4</label><input type="radio" name={{ question.id }} value=4></td>
-                        </tr>
-                    {% endfor %}    
+                    </tr>   
                 {% endfor %}
 
             </tbody>

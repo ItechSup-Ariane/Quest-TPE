@@ -1,0 +1,19 @@
+{% block body %}
+    
+    <h1>Selectionner le formulaire pour avoir son résumé:</h1>
+    <div name='choixQuestionnaire'>
+        <ul>
+            {% for questionnaire in questionnaires %}
+                <li><a href={{ path('resumeQuestionnaire', {'id':questionnaire.id}) }}>{{ questionnaire.title }}</a></li>
+                {% endfor %}
+        </ul>
+    </div>
+    <div name='gestionQuestionnaire'>
+        <ul>
+            <li><a href="{{ path("questionnaire_new") }}">Créer un questionnaire</a></li>
+            <li><a href={{ path('questionnaire')}}>Gestion des questionnaires</a></li>
+            <li><a href={{ path('fos_user_registration_register')}}>Ajouter un utilisateur</a></li>
+        </ul>
+    </div>
+
+{% endblock %}

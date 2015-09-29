@@ -2,13 +2,7 @@
 
 {% block javascripts -%}
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript">
-        console.log("ok");
-        
-        //*************************************************************************************
-        // A REPRENDRE AVEC QUESTIONNAIRE ET CATEGORIE POUR CHARGER LES CATEG DYNAMIQUEMENT !!!
-        //*************************************************************************************
-        
+    <script type="text/javascript">      
         // Récupère le div qui contient la collection de tags
         var $collectionHolder = $('ul.categories');
 
@@ -24,15 +18,15 @@
             // index when inserting a new item (e.g. 2)
             //$collectionHolder.data('index', $collectionHolder.find(':input').length);
             
-            function addTagForm(collectionHolder, $newLinkLi) {
+            function addCategoryForm($collectionHolder, $newLinkLi) {
                 // Récupère l'élément ayant l'attribut data-prototype comme expliqué plus tôt
-                var prototype = collectionHolder.attr('data-prototype');
+                var prototype = $collectionHolder.attr('data-prototype');
 
                 // Remplace '__name__' dans le HTML du prototype par un nombre basé sur
                 // la longueur de la collection courante
-                var newForm = prototype.replace(/__name__/g, collectionHolder.children().length);
+                var newForm = prototype.replace(/__name__/g, $collectionHolder.children().length);
 
-                // Affiche le formulaire dans la page dans un li, avant le lien "ajouter un tag"
+                // Affiche le formulaire dans la page dans un li, avant le lien "ajouter une categorie"
                 var $newFormLi = $('<li></li>').append(newForm);
                 $newLinkLi.before($newFormLi);
             }
@@ -42,7 +36,7 @@
                 e.preventDefault();
 
                 // ajoute un nouveau formulaire catégorie (voir le prochain bloc de code)
-                addTagForm($collectionHolder, $newLinkLi);
+                addCategoryForm($collectionHolder, $newLinkLi);
             });
         });       
     </script>
@@ -61,8 +55,9 @@
         {% endfor %}
     </ul>
     
-    {{ form_rest(form) }}
-    </form>
+    <input type="submit" value="soumettre" name="form_submit" />
+    
+    {{ form_end(form) }}
     
     <ul class="record_actions">
     <li>

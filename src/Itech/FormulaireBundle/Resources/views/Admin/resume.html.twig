@@ -1,0 +1,16 @@
+{% block body %}
+    <h1>Récapitulatif questionnaire : {{ questionnaire.title }}</h1>
+    <table class="questionnaire">
+        <tbody>
+            {% for categ in questionnaire.categories %}
+                <tr>
+                    <td><strong><u>{{ categ.libelle }}</u></strong></td>
+                </tr>   
+            {% endfor %}
+
+        </tbody>
+    </table>
+    <form action={{ path('index_admin') }}>
+        <input type='submit'  value='Retour'/>
+    </form>
+{% endblock %}
