@@ -35,6 +35,7 @@ class QuestionnaireController extends Controller
             'entities' => $entities,
         );
     }
+    
     /**
      * Creates a new Questionnaire entity.
      *
@@ -50,6 +51,8 @@ class QuestionnaireController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $user = $this->getUser();
+            $entity->setUser($user);
             $em->persist($entity);
             $em->flush();
 

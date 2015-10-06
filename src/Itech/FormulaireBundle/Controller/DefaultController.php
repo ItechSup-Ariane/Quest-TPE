@@ -33,6 +33,7 @@ class DefaultController extends Controller
               'name' => $userName,
         ));
     }
+    
     /**
      * Call the Default afficher view which
      * display the selected survey
@@ -51,6 +52,7 @@ class DefaultController extends Controller
               'questionnaire' => $questionnaire,
         ));
     }
+    
     /**
      * Get responses of the user and call the function insertRep 
      * 
@@ -67,24 +69,5 @@ class DefaultController extends Controller
             $this->insertRep($question, $request->request->get($question->getId()), $user);
         }
         return $this->redirect($this->generateUrl('index'));
-    }
-    /**
-     * insert response in database
-     * 
-     * 
-     * @param question $question
-     * @param string $value
-     * @param etudiant $user
-     * 
-     */
-    public function insertRep($question, $value, $user)
-    {
-        $reponse = new Reponse();
-        $reponse->setNote($value);
-        $reponse->setQuestion($question);
-        $reponse->setUser($user);
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($reponse);
-        $em->flush();
     }
 }
